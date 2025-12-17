@@ -17,6 +17,7 @@
 # include <iostream>
 # include <fstream>
 # include <exception>
+# include <iomanip>
 
 # define DB_FILE	"data.csv"
 # define COL_R		"\033[31m"

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:47:57 by psmolin           #+#    #+#             */
-/*   Updated: 2025/12/17 14:51:52 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/12/17 15:13:11 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 
 	// Reading lines
 	std::string 	line;
+	std::getline(file, line);
 	while (std::getline(file, line))
 	{
 		try

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 13:12:16 by psmolin           #+#    #+#             */
-/*   Updated: 2025/12/17 14:56:32 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/12/17 15:32:37 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	BitcoinExchange::importDatabase()
 		}
 
 		std::string	date = line.substr(0, delimiter);
-		double		value = std::stod(line.substr(delimiter + 1));
-		_db[date] = value;
+		_db[date] = std::stod(line.substr(delimiter + 1));
 	}
 	file.close();
 }
@@ -50,9 +49,19 @@ static bool isValidDate(const std::string &date)
 	return true;
 }
 
-static void printOutput(const std::string &date, double amount, double result)
+static std::string strTrim(const std::string &str)
 {
-	std::cout << COL_G << date << COL_X << " => " << amount << " = " << result << std::endl;
+	size_t	start = str.find_first_not_of(" \t\r\n");
+	size_t	end = str.find_last_not_of(" \t\r\n");
+	if (start == std::string::npos || end == std::string::npos)
+		return "";
+	return str.substr(start, end - start + 1);
+}
+
+static void printOutput(const std::string &date, double amount, double quantity)
+{
+	std::cout << COL_G << date << COL_X << " => " << amount << " * " \
+		<< std::setprecision(10) << amount * quantity << std::endl;
 }
 
 void	BitcoinExchange::calculate(const std::string &line) const
@@ -64,8 +73,20 @@ void	BitcoinExchange::calculate(const std::string &line) const
 		return ;
 	}
 
-	std::string	date = line.substr(0, delimiter - 1);
-	double		amount = std::stod(line.substr(delimiter + 1));
+	std::string date = strTrim(line.substr(0, delimiter));
+	if (date.empty() || !isValidDate(date))
+	{
+		throw BadInputException();
+		return ;
+	}
+
+	double		amount;
+	try {
+		amount = std::stod(line.substr(delimiter + 1));
+	}
+	catch (const std::exception &e) {
+		throw BadInputException();
+	}
 
 	if (amount < 0)
 		throw NumberTooSmallException();
@@ -75,9 +96,9 @@ void	BitcoinExchange::calculate(const std::string &line) const
 		throw BadInputException();
 
 	std::map<std::string, double>::const_iterator it = _db.find(date);
-	if (it != _db.end() || it->first != date)
+	if (it != _db.end() && it->first == date)
 	{
-		printOutput(date, amount, it->second * amount);
+		printOutput(date, amount, it->second);
 		return ;
 	}
 	it = _db.upper_bound(date);
@@ -88,9 +109,7 @@ void	BitcoinExchange::calculate(const std::string &line) const
 	}
 
 	--it;
-	double	rate = it->second;
-	double	result = rate * amount;
-	printOutput(date, amount, it->second * amount);
+	printOutput(date, amount, it->second);
 }
 
 // EXCEPTIONS
@@ -104,7 +123,7 @@ const char*	BitcoinExchange::CorruptedDatabaseException::what() const noexcept{
 }
 
 const char*	BitcoinExchange::NumberTooSmallException::what() const noexcept{
-	return "Error: too small a number.";
+	return "Error: not a positive number.";
 }
 
 const char*	BitcoinExchange::NumberTooLargeException::what() const noexcept{
