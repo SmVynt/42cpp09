@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 13:12:16 by psmolin           #+#    #+#             */
-/*   Updated: 2025/12/17 15:32:37 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/12/17 16:57:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	BitcoinExchange::calculate(const std::string &line) const
 		return ;
 	}
 
-	double		amount;
+	double	amount;
 	try {
 		amount = std::stod(line.substr(delimiter + 1));
 	}
