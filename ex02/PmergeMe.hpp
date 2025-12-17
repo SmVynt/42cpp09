@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 13:47:57 by psmolin           #+#    #+#             */
-/*   Updated: 2025/12/18 00:11:21 by psmolin          ###   ########.fr       */
+/*   Created: 2025/12/17 12:58:56 by psmolin           #+#    #+#             */
+/*   Updated: 2025/12/18 00:10:35 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PmergeMe.hpp"
+#ifndef PMERGEME_HPP
+# define PMERGEME_HPP
 
-#include <iostream>
-#include <list>
+// # include <stack>
+# include <iostream>
+# include <exception>
 
-int main(int argc, char **argv)
-{
-	if (argc != 2)
-	{
-		std::cerr << COL_R << "Error: too many arguments." << COL_X << std::endl;
-		return 1;
-	}
+# define COL_R		"\033[31m"
+# define COL_G		"\033[32m"
+# define COL_Y		"\033[33m"
+# define COL_B		"\033[34m"
+# define COL_X		"\033[0m"
 
-	try
-	{
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << COL_R << e.what() << COL_X << '\n';
-	}
+class IncorrectInputException : public std::exception {
+			public:
+				virtual const char* what() const noexcept;
+		};
 
-	return 0;
-}
+
+
+#endif

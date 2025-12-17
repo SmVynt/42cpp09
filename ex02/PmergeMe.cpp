@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/15 13:47:57 by psmolin           #+#    #+#             */
-/*   Updated: 2025/12/18 00:11:21 by psmolin          ###   ########.fr       */
+/*   Created: 2025/12/17 13:12:16 by psmolin           #+#    #+#             */
+/*   Updated: 2025/12/18 00:11:10 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-#include <iostream>
-#include <list>
-
-int main(int argc, char **argv)
+int	calculate(const std::string &line)
 {
-	if (argc != 2)
-	{
-		std::cerr << COL_R << "Error: too many arguments." << COL_X << std::endl;
-		return 1;
-	}
-
-	try
-	{
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << COL_R << e.what() << COL_X << '\n';
-	}
-
-	return 0;
 }
+
+// EXCEPTIONS
+
+const char*	IncorrectInputException::what() const noexcept{
+	return "Error: incorrect input.";
+}
+
+

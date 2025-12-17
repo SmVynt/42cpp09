@@ -6,11 +6,11 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 12:51:50 by psmolin           #+#    #+#              #
-#    Updated: 2025/12/16 01:49:15 by psmolin          ###   ########.fr        #
+#    Updated: 2025/12/17 23:38:12 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = stack
+NAME = PmergeMe
 CXX = c++
 RM = rm -f
 CXXFLAGS = -Wall -Wextra -Werror -std=c++17
