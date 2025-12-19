@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:58:56 by psmolin           #+#    #+#             */
-/*   Updated: 2025/12/19 18:19:38 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/12/19 18:29:05 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,22 @@
 # define COL_B		"\033[34m"
 # define COL_X		"\033[0m"
 
-void	init_numbers(std::vector<int> *numbers, char **argv);
+void	init_numbers_vector(std::vector<int> *numbers, char **argv);
+void	init_numbers_deque(std::deque<int> *numbers, char **argv);
 void	print_vector(const std::vector<int> &numbers, const std::string &msg);
 
-template <typename T>
-void	printContainer(const T &container);
-template <typename T>
-void	printContainerGroups(const T &container, size_t groupSize);
+// template <typename T>
+// void	printContainer(const T &container);
+// template <typename T>
+// void	printContainerGroups(const T &container, size_t groupSize);
 
-// LIST APPROACH
-// void	init_pairs_list(std::list<std::pair<int, int>> *pairsList,
-		// const std::vector<int> &numbers);
-void	merge_insertion_sort_vector(std::vector<int> &vector,
+void	merge_insertion_sort_vector
+		(std::vector<int> &vector,
 		size_t start, size_t end, size_t groupSize);
+void	merge_insertion_sort_deque
+		(std::deque<int> &deque,
+		size_t start, size_t end, size_t groupSize);
+
 
 class	IncorrectInputException : public std::exception {};
 

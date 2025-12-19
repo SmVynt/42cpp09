@@ -6,11 +6,12 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:47:57 by psmolin           #+#    #+#             */
-/*   Updated: 2025/12/19 18:17:25 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/12/19 18:47:53 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <iomanip>
 
 int main(int argc, char **argv)
 {
@@ -20,12 +21,15 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	std::vector<int>	numbers;
+	std::vector<int>	numbersVec;
+	std::deque<int>		numbersDeq;
+
 
 	try
 	{
-		init_numbers(&numbers, argv);
-		print_vector(numbers, "Before:");
+		init_numbers_vector(&numbersVec, argv);
+		init_numbers_deque(&numbersDeq, argv);
+		print_vector(numbersVec, "Before:");
 	}
 	catch(const IncorrectInputException &e)
 	{
@@ -33,24 +37,45 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	//APPROACH WITH LIST
-
-	std::list<std::pair<int, int>>	pairsList;
-	std::list<int>					mainLineList;
-
+	//APPROACH WITH VECTOR
 	try
 	{
-		// init_pairs_list(&pairsList, numbers);
-		merge_insertion_sort_vector(numbers, 0, numbers.size(), 1);
-		print_vector(numbers, "After:");
+		clock_t startTime = clock();
+		merge_insertion_sort_vector(numbersVec, 0, numbersVec.size(), 1);
+		clock_t endTime = clock();
+		double timeVec = static_cast<double>(endTime - startTime) / 1000;
+
+		print_vector(numbersVec, "After:");
+		std::cout << "Time to process a range of " << numbersVec.size() \
+		<< " elements with std::vector : " \
+		<< std::fixed << std::setprecision(5) << timeVec \
+		<< " ms" << std::endl;
+
 	}
 	catch(const std::exception &e)
 	{
-		std::cerr << COL_R << "Error: exception occurred during sorting with list." << COL_X << '\n';
+		std::cerr << COL_R << "Error: exception occurred during sorting with vector." << COL_X << '\n';
 		return 1;
 	}
 
 	//APPROACH WITH DEQUE
+	try
+	{
+		clock_t startTime = clock();
+		merge_insertion_sort_deque(numbersDeq, 0, numbersDeq.size(), 1);
+		clock_t endTime = clock();
+		double timeDeq = static_cast<double>(endTime - startTime) / 1000;
+
+		std::cout << "Time to process a range of " << numbersDeq.size() \
+		<< " elements with std::deque : " \
+		<< std::fixed << std::setprecision(5) << timeDeq \
+		<< " ms" << std::endl;
+	}
+	catch(const std::exception &e)
+	{
+		std::cerr << COL_R << "Error: exception occurred during sorting with deque." << COL_X << '\n';
+		return 1;
+	}
 
 	return 0;
 }
