@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:47:57 by psmolin           #+#    #+#             */
-/*   Updated: 2025/12/19 18:47:53 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/12/19 18:52:31 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int main(int argc, char **argv)
 		double timeVec = static_cast<double>(endTime - startTime) / 1000;
 
 		print_vector(numbersVec, "After:");
-		std::cout << "Time to process a range of " << numbersVec.size() \
-		<< " elements with std::vector : " \
+		std::cout << COL_Y << "Time to process a range of " << numbersVec.size() \
+		<< " elements with std::vector : " << COL_X \
 		<< std::fixed << std::setprecision(5) << timeVec \
 		<< " ms" << std::endl;
 
@@ -66,8 +66,8 @@ int main(int argc, char **argv)
 		clock_t endTime = clock();
 		double timeDeq = static_cast<double>(endTime - startTime) / 1000;
 
-		std::cout << "Time to process a range of " << numbersDeq.size() \
-		<< " elements with std::deque : " \
+		std::cout << COL_Y << "Time to process a range of " << numbersDeq.size() \
+		<< " elements with std::deque : " << COL_X \
 		<< std::fixed << std::setprecision(5) << timeDeq \
 		<< " ms" << std::endl;
 	}
