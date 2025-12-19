@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 12:51:50 by psmolin           #+#    #+#              #
-#    Updated: 2025/12/17 23:38:12 by psmolin          ###   ########.fr        #
+#    Updated: 2025/12/19 01:32:08 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,10 @@ CXX = c++
 RM = rm -f
 CXXFLAGS = -Wall -Wextra -Werror -std=c++17
 SRCS = \
-		main.cpp
+		main.cpp \
+		PmergeMe.cpp
 HEADERS = \
-		MutantStack.hpp \
-		MutantStack.tpp
+		PmergeMe.hpp
 OBJS = $(SRCS:.cpp=.o)
 
 %.o: %.cpp $(HEADERS)
